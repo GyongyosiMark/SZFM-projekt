@@ -5,6 +5,23 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 
 
+def collides(rect1, rect2):
+    #sima AABB utkozes detektor: ha a negyzetek fedik egymast akkor utkoznek
+    r1x = rect1[0][0]
+    r1y = rect1[0][1]
+    r2x = rect2[0][0]
+    r2y = rect2[0][1]
+    r1w = rect1[1][0]
+    r1h = rect1[1][1]
+    r2w = rect2[1][0]
+    r2h = rect2[1][1]
+
+    if r1x < r2x + r2w and r1x + r1w > r2x and r1y < r2y + r2h and r1y + r1h > r2y:
+        return True
+    else:
+        return False
+
+
 class PlatformerGame(Widget):
 
     def __init__(self, **kwargs):
@@ -21,6 +38,7 @@ class PlatformerGame(Widget):
         with self.canvas:
             # letrehozzuk a karakter, alakitjuk a kv fileba
             self.player = Rectangle(source="player.png")
+            self.enemy = Rectangle(source="enemy.png",pos=(400,400))
 
         self.keysPressed = set()
         # halmazban taroljuk az aktualisan lenyomott billentyuket
@@ -32,7 +50,6 @@ class PlatformerGame(Widget):
         # ha nincs mar input akkor unbindoljuk
         self._keyboard_unbind(on_key_down=self._on_key_down)
         self._keyboard_unbind(on_key_up=self._on_key_up)
-
         self._keyboard = None
 
     def _on_key_down(self, keyboard, keycode, text, modifiers):
@@ -46,6 +63,7 @@ class PlatformerGame(Widget):
             self.keysPressed.remove(text)
 
     def move_step(self, dt):
+        #mostmar a lepesek egysegesek eszkoztol fuggetlenul(idohoz van kotve)
         currentx = self.player.pos[0]
         currenty = self.player.pos[1]
 
@@ -61,6 +79,9 @@ class PlatformerGame(Widget):
             currentx += step_size
 
         self.player.pos = (currentx, currenty)
+
+        if collides((self.player.pos,self.player.size),(self.enemy.pos,self.enemy.size)):
+            print("Collides!")
 
 
 class PlatformerApp(App):
