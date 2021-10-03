@@ -36,7 +36,7 @@ még ha nem is küszködnek ilyen gondokkal, illetve marketing fogásként is na
 A játék elindításakor a képernyőn megjelenik a karakter amit a játékos tud irányítani, valamint egy ellenfél.
 
 <img src=".\\img\\kepernyo_terv.png" data-canonical-src=".\\img\\kepernyo_terv.png">
-![asd](.\\img\\kepernyo_terv.png)
+![asd](.img|kepernyo_terv.png)
 
 ## 7. Forgatókönyvek.
 A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját karakter amit a W-A-S-D gombokkal lehet irányítani és ezenkívül van egy ellenfél, amihez ha hozzáér a karakterünk ezt érzékeli.
