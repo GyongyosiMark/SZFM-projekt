@@ -1,6 +1,6 @@
-## SZFM-projekt
+# SZFM-projekt
 
-# A szoftverfelesztési módszertanok kurzushoz készült repository.
+## A szoftverfelesztési módszertanok kurzushoz készült repository.
 
 A csapat tagjai:
 * Orosz Regina
