@@ -41,8 +41,8 @@ A játék elindításakor a képernyőn megjelenik a karakter amit a játékos t
 A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját karakter amit a W-A-S-D gombokkal lehet irányítani és ezenkívül van egy ellenfél, amihez ha hozzáér a karakterünk ezt érzékeli.
 
 ## 8. Funkció – követelmény megfeleltetés.
-* 8.1 A program futtatásához Python 3-ra van szügségünk
-* 8.2 A futtatáshoz Kivy programzói könyvtárra van szügségünk
+* 8.1 A program futtatásához Python 3-ra van szükségünk
+* 8.2 A futtatáshoz Kivy programzói könyvtárra van szükségünk
 
 ## 9. Fogalomszótár:
 * 9.1 Kivy - A Kivy egy nyílt forráskódú Python programozói könyvtár, gyors alkalmazásfejlesztéshez, ami újszerű felhasználói felületet használ, mint a többérintéses alkalmazások. A Kivy program fut Linuxon, Windowson, macOS-en, Androidon, iOS-en, és Raspberry Pi-n. Ugyanaz a kód futhat minden platformon.
