@@ -45,7 +45,7 @@ A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és tov�
 * 7.1.2 észrevételek dokumentálása
 * 7.1.3 teszt dokumentáció archiválása
 
-### 7.2 A tesztelést manuálisan kell végrehajtani. A teszt akkor sikeres, ha a program minden komponensét átnézve (ebben értendő az ellenféllel való harc, a saját karakter mozgatása) rendben működik és nem kapunk hibaüzentet vagy programleállást.
+### 7.2 A tesztelést manuálisan kell végrehajtani. A teszt akkor sikeres, ha a program minden komponensét átnézve (ebben értendő az ellenféllel való harc, a saját karakter mozgatása, regisztrálás, belépés) rendben működik és nem kapunk hibaüzentet vagy programleállást.
 
 ### 7.3 A manuális tesztelés során egy tesztjegyzőkönyvet kell készíteni amiben dokumentálva van a tesztelt funkció annak elvárt viselkedése, a funkció által adott viselkedés és az, hogy ez sikeres/sikertelen.
 
