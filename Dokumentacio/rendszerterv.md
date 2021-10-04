@@ -21,7 +21,6 @@ Az elkészült elemeket Github-ra töltjük fel.
 * Gyöngyösi Márk
 
 ## 4. Követelmények:
-
 A rendszerterv az alábbi követelmények megvalósítását célozza meg:
 * a játékban egy külön ablakban jelenjen meg
 * a játékban jelenjen meg, hogy a játékos hogyan tudja irányítani a karakterét
@@ -30,6 +29,9 @@ A rendszerterv az alábbi követelmények megvalósítását célozza meg:
 * a menü legyen egyértelmű és egyszerű
 * a high-score jelenjen meg a menü felületén
 * az eredmények eltárolása adatbázisban
+
+## 5. Fizikai környezet:
+A játékot Visual Studio Code, valamint PyCharm fejlesztőeszközök segítségével fogjuk fejleszteni. A fejlesztés során alkalmazni fogjuk a Kivy, a Tkinter librarykat pythonhoz, valamint használni fogunk MySQL adatbázist is az eredmények eltárolása érdekében. A játék PC platformon lesz elérhető.
 
 ## 6. Absztrakt domain modell:
 A programunkban az MVC programtervezési mintát követjük. Ez a minta három részből áll: Modell, Nézet, és Vezérlő.
