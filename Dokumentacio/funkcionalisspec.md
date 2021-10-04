@@ -38,6 +38,7 @@ A játék elindításakor a képernyőn megjelenik a karakter amit a játékos t
 ![asd](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/kepernyo_terv.PNG)
 
 ## 7. Forgatókönyvek.
+Az első futtatásnál regisztrálni kell és továbbiakban a regisztrált felhasználónévvel és jelszóval lehet bejelentkezni.
 A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját karakter amit a W-A-S-D gombokkal lehet irányítani és ezenkívül van egy ellenfél, amihez ha hozzáér a karakterünk ezt érzékeli.
 
 ## 8. Funkció – követelmény megfeleltetés.
