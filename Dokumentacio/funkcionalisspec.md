@@ -43,7 +43,9 @@ A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját ka
 ## 8. Funkció – követelmény megfeleltetés.
 * 8.1 A program futtatásához Python 3-ra van szükségünk
 * 8.2 A futtatáshoz Kivy programzói könyvtárra van szükségünk
+* 8.3 MySQL adatbázis kezelő rendszerre van szükség
 
 ## 9. Fogalomszótár:
 * 9.1 Kivy - A Kivy egy nyílt forráskódú Python programozói könyvtár, gyors alkalmazásfejlesztéshez, ami újszerű felhasználói felületet használ, mint a többérintéses alkalmazások. A Kivy program fut Linuxon, Windowson, macOS-en, Androidon, iOS-en, és Raspberry Pi-n. Ugyanaz a kód futhat minden platformon.
-* 9.3 Python - A Python egy könnyen tanulható, de hatékony programozási nyelv. Magasszintű adatstruktúrái, az objektum-orientáltság egyszerű megközelítése, elegáns szintaxisa, dinamikus típusossága és interpreteres mivolta ideális script-nyelvvé teszi.
+* 9.2 Python - A Python egy könnyen tanulható, de hatékony programozási nyelv. Magasszintű adatstruktúrái, az objektum-orientáltság egyszerű megközelítése, elegáns szintaxisa, dinamikus típusossága és interpreteres mivolta ideális script-nyelvvé teszi.
+* 9.3 MySQL - A MySQL egy többfelhasználós, többszálú, SQL-alapú relációs adatbázis-kezelő szerver.
