@@ -20,6 +20,17 @@ Az elkészült elemeket Github-ra töltjük fel.
 * Batizi Máté
 * Gyöngyösi Márk
 
+## 4. Követelmények:
+
+A rendszerterv az alábbi követelmények megvalósítását célozza meg:
+* a játékban egy külön ablakban jelenjen meg
+* a játékban jelenjen meg, hogy a játékos hogyan tudja irányítani a karakterét
+* a játékban lehessen pontokat gyűjteni a megölt ellenfelek után és ezt egy számláló mutassa az egyik sarokban
+* a játék felülete legyen egyszerű
+* a menü legyen egyértelmű és egyszerű
+* a high-score jelenjen meg a menü felületén
+* az eredmények eltárolása adatbázisban
+
 ## 6. Absztrakt domain modell:
 A programunkban az MVC programtervezési mintát követjük. Ez a minta három részből áll: Modell, Nézet, és Vezérlő.
 A modell valósítja meg az üzleti logikát.
