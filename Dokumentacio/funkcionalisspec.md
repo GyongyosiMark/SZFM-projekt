@@ -39,7 +39,14 @@ A játék elindításakor a képernyőn megjelenik a karakter amit a játékos t
 
 ## 7. Forgatókönyvek.
 Az első futtatásnál regisztrálni kell és továbbiakban a regisztrált felhasználónévvel és jelszóval lehet bejelentkezni.
-A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját karakter amit a W-A-S-D gombokkal lehet irányítani és ezenkívül van egy ellenfél, amihez ha hozzáér a karakterünk ezt érzékeli.
+A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját karakter amit a W-A-S-D gombokkal lehet irányítani.
+A játékban a lényeg, hogy minnél több pontot gyűjtve és minnél gyorsabban vigyük végig a pályát megölve az ellenfeleket és felvéve az érméket. Az érméket úgy lehet felvenni, ha belemegyünk.
+Vannak a pályán ellenfelek, amikkel meg lehet küzdeni és egy fegyverrel, ami lehet pisztoly, gépfegyver vagy csapdákat tudunk letenni amibe az ellenfelek belesétálhatnak azonban ez csak véges számú és ezáltal megölni őket. Egy ellenfél megölése esetén pontokat kapunk ami hozzáadódik a számlálóhoz és a végén kapott pontoszámhoz.
+A saját karakterünknek alapértelmezetten kettő élete van, amit ha elveszít akkor "Game Over" feliratot kap és megmutatja az eddigiekben elért pontszámot. Viszont a futás alatt van lehetőség több élet gyűjtésére, ami hozzáadódik a eddigi életeihez. Az életeket úgy lehet elveszíteni, ha nekimegyünk egy ellenfélnek vagy beleesünk valamilyen csapdába, azonban a futás automatikusan visszadob vagy a pálya elejére vagy az utolsó mentési pontra, ha eljutottunk egy pálya olyan részére ahol már begyűjthettünk egy mentési pontot, ha leesünk a pályáról.
+A pontok a felső sarokban jelennek meg és folyamatosan frissülnek, ha egy ellenfelet ölünk meg vagy egy érmét veszünk fel.
+A pontokat a program eltárolja és a legközelebbi futáskor visszanézhető, hogy ki milyen felhasználónévvel érte el a legmagasabb pontszámot és ezt a pontszámot milyen gyorsan sikerült elérnie. Ezt egy három oszlopos táblázatban mutatja, ahol az első oszlop megjeleníti a felhasználó nevét a második oszlop megjeleníti a a felhasználónak elért pontszámát és a harmadik oszlopban megjelenik az idő, ami alatt sikerült teljesítenie a pályát.
+Ezt a funkciót egy High Score menüpontban érhetjük el, amiben egymás alatt megjelenik a három legmagasabb pontszám és azoknak a felhasználónak a neve, aki elérte azt a pontszámot.
+
 
 ## 8. Funkció – követelmény megfeleltetés.
 * 8.1 A program futtatásához Python 3-ra van szükségünk
