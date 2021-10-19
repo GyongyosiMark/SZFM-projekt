@@ -47,7 +47,7 @@ Menu, amiből elérhetőek az említett funkciók
 
 Top lista, benne néhány játékos által elért pontsszámok
 
-![asd4](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/highscore.PNG)
+![asd4](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/highscore.png)
 
 ## 7. Forgatókönyvek.
 <p>Az első futtatásnál regisztrálni kell és továbbiakban a regisztrált felhasználónévvel és jelszóval lehet bejelentkezni.</p>
