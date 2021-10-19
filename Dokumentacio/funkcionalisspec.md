@@ -39,7 +39,7 @@ A játék elindításakor a képernyőn megjelenik a karakter amit a játékos t
 
 A játék már egy kiforottab alakban, fegyver, karakter ellenfelek, pályamodell, háttér
 
-![asd2]https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/gamescreen.jpg)
+![asd2](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/gamescreen.jpg)
 
 Menu, amiből elérhetőek az említett funkciók
 
