@@ -39,15 +39,15 @@ A játék elindításakor a képernyőn megjelenik a karakter amit a játékos t
 
 A játék már egy kiforottab alakban, fegyver, karakter ellenfelek, pályamodell, háttér
 
-![asd2](https://github.com/Kaiusz/SZFM-projekt/tree/main/captures/gamescreen.jpg)
+![asd2]https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/gamescreen.jpg)
 
 Menu, amiből elérhetőek az említett funkciók
 
-![asd3](https://github.com/Kaiusz/SZFM-projekt/tree/main/captures/menu.jpg)
+![asd3](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/menu.jpg)
 
 Top lista, benne néhány játékos által elért pontsszámok
 
-![asd4](https://github.com/Kaiusz/SZFM-projekt/tree/main/captures/highscore.PNG)
+![asd4](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/highscore.PNG)
 
 ## 7. Forgatókönyvek.
 <p>Az első futtatásnál regisztrálni kell és továbbiakban a regisztrált felhasználónévvel és jelszóval lehet bejelentkezni.</p>
