@@ -80,7 +80,7 @@ ha belemegyünk.</p>
 * 9.1 Kivy - A Kivy egy nyílt forráskódú Python programozói könyvtár, gyors alkalmazásfejlesztéshez, ami újszerű felhasználói felületet használ, mint a többérintéses alkalmazások. A Kivy program fut Linuxon, Windowson, macOS-en, Androidon, iOS-en, és Raspberry Pi-n. Ugyanaz a kód futhat minden platformon.
 * 9.2 Python - A Python egy könnyen tanulható, de hatékony programozási nyelv. Magasszintű adatstruktúrái, az objektum-orientáltság egyszerű megközelítése, elegáns szintaxisa, dinamikus típusossága és interpreteres mivolta ideális script-nyelvvé teszi.
 * 9.3 MySQL - A MySQL egy többfelhasználós, többszálú, SQL-alapú relációs adatbázis-kezelő szerver.
-* * Videójáték - A videojátékok olyan elektronikus játékszoftverek, amelyeket szórakoztatás céljából fejlesztettek ki olyan elektronikus eszközökön keresztül, mint például játéktermek, konzolok, számítógépek vagy digitális eszközök.
+* Videójáték - A videojátékok olyan elektronikus játékszoftverek, amelyeket szórakoztatás céljából fejlesztettek ki olyan elektronikus eszközökön keresztül, mint például játéktermek, konzolok, számítógépek vagy digitális eszközök.
 * Karakter - Egy figura, amit a felhasználó irányít a játék közben.
 * Pálya - Az a tér, ahol a játékos a karaktert irányítja.
 * Pont - Az az érték amivel egy játékos rendelkezik, ez minősíti a teljesítményét
