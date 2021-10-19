@@ -38,7 +38,7 @@ A játék elindításakor a képernyőn megjelenik a karakter amit a játékos t
 ![asd](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/kepernyo_terv.PNG)
 
 ## 7. Forgatókönyvek.
-Az első futtatásnál regisztrálni kell és továbbiakban a regisztrált felhasználónévvel és jelszóval lehet bejelentkezni.
+<p>Az első futtatásnál regisztrálni kell és továbbiakban a regisztrált felhasználónévvel és jelszóval lehet bejelentkezni.</p>
 A futási időben az figyelhető meg, hogy egy ablakban megjelenik egy saját karakter amit a W-A-S-D gombokkal lehet irányítani.
 A játékban a lényeg, hogy minnél több pontot gyűjtve és minnél gyorsabban vigyük végig a pályát megölve az ellenfeleket és felvéve az érméket. Az érméket úgy lehet felvenni, ha belemegyünk.
 Vannak a pályán ellenfelek, amikkel meg lehet küzdeni és egy fegyverrel, ami lehet pisztoly, gépfegyver vagy csapdákat tudunk letenni amibe az ellenfelek belesétálhatnak azonban ez csak véges számú és ezáltal megölni őket. Egy ellenfél megölése esetén pontokat kapunk ami hozzáadódik a számlálóhoz és a végén kapott pontoszámhoz.
