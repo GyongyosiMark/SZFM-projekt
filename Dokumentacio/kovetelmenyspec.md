@@ -6,8 +6,24 @@ A résztvevők egy héten keresztül fejleszthetik tudásukat a táborvezetők s
 A tábor egyik különlegessége az, hogy itt nem csak a már jól ismert játékokban mérhetik össze a tudásukat a résztvevők, hanem egy kifejezetten erre az alkalomra fejlesztett játékban is kipróbálhatják magukat. 
 
 ## 2. Vágyálomrendszer leírása:
-Mivel a True Gamer gaming tábor népszerűsége egyre csak nő, az idei évben szeretné meglepni a táborozókat egy saját kis játékkal, amely hozzájárul az egyéni fejlődéshez is, valamint közelebb hozza a táborozókat, ezáltal jobb élményt nyújtva mind a táborozóknak, mind a személyzetnek. A játéknak több célja is lenne. A főbb célok között van a szórakoztatás, a fejlődés, de egy verseny is fog indulni a játékkal, amin a legtöbb pontszámot elért játékosok nyereményeket is nyerhetnek.
-Tehát a táborban résztvevők, valamint a személyzet minden tagjának szeretnénk egy 2D-s játékot biztosítani. A játéknak az lenne a lényege, hogy az adott játékosnak végig kell mennie az aktuális pályán vagy pályákon, felvéve minnél több érmét, majd ezután eljutni a célba, hogy átléphessen a következő pályára. A különböző pályákon különböző pozíciókban, más-más csapdák legyenek elhelyezve, akár különböző méretben, a pályák jól elkülöníthetőek legyenek. Mindezekmellett valami kompetitivitást is bele kell raknunk a játékba, ugyanis versenyt tervezünk szervezni a játékkal kapcsolatban. Arra gondoltunk, hogy ennek megoldására egy pontrendszer lenne a legalkalmasabb. Minden egyes felvett érméért a játékos pontot kap, minden egyes csapdába sétálásért (halálért) a játékos pontot veszít, valamint minél gyorsabban teljesít egy játékos egy pályát, annál több pontot kap a végén. A játékos továbbá gyüjthet még fegyvereket, plusz életet, páncélt vagy különböző erősítéseket. Mindezek mellett, a pályán el lesznek rejtve bónusz ládák is, illetve kulcsok amik a továbbjutáshoz kellennek, ezzel egy kis logikát viszünk a játékba. Egy stratégia elem lehetne az, hogy az ellenfelek számára csapdákat helyezünk le. A legtöbb pontot szerzett játékosok egy TOP 3-as listában lesznek, ez a lista is a játékban tekinthető meg, benne a játékos nevével és az elért pontszámmal. Ehhez az szükséges, hogy a játék végén, ha a játékos bekerült a legjobb 3 helyezett közé, akkor megadhassa a nevét és ez legyen elmentve egy adatbázisba. A menüben legyen egy gomb is, amivel törölhető az adatbázis tartalma, ugyanis a különböző korosztályok külön fognak versenyezni, ezért minden korosztály versenyének kezdete előtt ki kell üríteni az eddigi eredményeket. A menüben a játékosok több karakter közül is választhassanak. A játéknak esztétitikusnak kell lennie, háttér hangoknak és effekteknek is kell szerepelni. A játéknak egyszerű története is legyen. 
+<p>Mivel a True Gamer gaming tábor népszerűsége egyre csak nő, az idei évben szeretné meglepni a táborozókat egy saját kis játékkal, amely hozzájárul az egyéni fejlődéshez is,
+  valamint közelebb hozza a táborozókat, ezáltal jobb élményt nyújtva mind a táborozóknak, mind a személyzetnek.</p> 
+<p>A játéknak több célja is lenne. A főbb célok között van a szórakoztatás, a fejlődés, de egy verseny is fog indulni a játékkal, amin a legtöbb pontszámot elért játékosok 
+  nyereményeket is nyerhetnek. Tehát a táborban résztvevők, valamint a személyzet minden tagjának szeretnénk egy 2D-s játékot biztosítani.</p> 
+  <p>A játéknak az lenne a lényege, hogy az adott játékosnak végig kell mennie az aktuális pályán vagy pályákon, felvéve minnél több érmét, majd ezután eljutni a célba, hogy
+  átléphessen a következő pályára. </p> 
+  <p>A különböző pályákon különböző pozíciókban, más-más csapdák legyenek elhelyezve, akár különböző méretben, a pályák jól elkülöníthetőek legyenek.</p>
+  <p>Mindezekmellett valami kompetitivitást is bele kell raknunk a játékba, ugyanis versenyt tervezünk szervezni a játékkal kapcsolatban. Arra gondoltunk, hogy ennek megoldására
+  egy pontrendszer lenne a legalkalmasabb. Minden egyes felvett érméért a játékos pontot kap, minden egyes csapdába sétálásért (halálért) a játékos pontot veszít, valamint minél 
+  gyorsabban teljesít egy játékos egy pályát, annál több pontot kap a végén. </p>
+  <p>A játékos továbbá gyüjthet még fegyvereket, plusz életet, páncélt vagy különböző erősítéseket. Mindezek mellett, a pályán el lesznek rejtve bónusz ládák is, illetve kulcsok
+  amik a továbbjutáshoz kellennek, ezzel egy kis logikát viszünk a játékba. Egy stratégia elem lehetne az, hogy az ellenfelek számára csapdákat helyezünk le. 
+  <p>A legtöbb pontot szerzett játékosok egy TOP 3-as listában lesznek, ez a lista is a játékban tekinthető meg, benne a játékos nevével és az elért pontszámmal. </p>
+  <p>Ehhez az szükséges, hogy a játék végén, ha a játékos bekerült a legjobb 3 helyezett közé, akkor megadhassa a nevét és ez legyen elmentve egy adatbázisba. </p>
+  <p>A menüben legyen egy gomb is, amivel törölhető az adatbázis tartalma, ugyanis a különböző korosztályok külön fognak versenyezni, ezért minden korosztály versenyének kezdete
+  előtt ki kell üríteni az eddigi eredményeket.</p>
+  <p> A menüben a játékosok több karakter közül is választhassanak. A játéknak esztétitikusnak kell lennie, háttér hangoknak és effekteknek is kell szerepelni. A játéknak 
+  egyszerű története is legyen. </p>
 
 ## 3 Jelenlegi Üzleti Folyamatok Modellje
 ### 3.1 Regisztráció
@@ -77,3 +93,12 @@ Tehát a táborban résztvevők, valamint a személyzet minden tagjának szeretn
 * Bonus chest - Olyan elem a pályán ami előnyökhez juttatja a játékost
 * Páncél - Ha a játékos ezzel rendelkezik, akkor kivédi az ellenfelek egy támadását
 * Power Up - olyan bónusz tulajdonság amit a játékos megszerezhet (pl. gyorsaság)
+* W-A-S-D - a billentyűzet azon gombjai amelyekkel a karaktert egy derékszögű koordináta rendszerben mozgathatunk. Ennek a rendszernek az origója a képernyő bal alsó sarka, a játékos spawnpointja
+* spawnpoint - a játékos karakterének kezdőpontja, a játék betöltődése után
+* érme - a pályadizájn egy eleme, gyűjthető elemek, hozzáadnak a játékos által elért pontszámhoz
+* pisztoly - az egyik megszerezhető fegyver, bal egérgomb kattintásra egy golyót lő ki
+* gépfegyver - a másik megszerezhető fegyver, a bal egérgomb nyomva tartásával sorozatosan lő
+* mentési pont/checkpoint - ha a játékosnak, halála után marad még élete akkor a pálya egy kijelölt részén éled, ha ezt már elérte, egy ilyen pont elérésekor, üzenetet küldünk
+* High Score - a játékos által elért legmagasabb pontszám, mely tárolódik, ebből a TOP 3 megtekinthető az alkalmazásból
+* asztali számítógép - Az asztali számítógép retronim kifejezés olyan személyi számítógépet (PC) vagy munkaállomást jelent, amely a többfelhasználós számítógépeknél általában    kisebb helyen, a hordozható eszközökhöz képest viszonylag kötött helyen (például egy íróasztalon) működik.
+* TOP lista - a legjobb N darab játékos listája, elért pontszám és idő szerint
