@@ -40,6 +40,47 @@ A modell valósítja meg az üzleti logikát.
 A nézet felel a felhaszálói felület megjelenítéséért. Itt jelenik meg a felhasználónak szánt adatok.
 A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és továbbítja azt a modell réteg felé, valamit a modell adatait a nézet felé.
 
+##  Use casek: 
+
+# Regisztrációs menü
+
+![asd1](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/247068458_565058974568987_706624926524511276_n.png)
+
+
+* Az alkalmazás indítása után a felhasználóknak regisztrálni kell, vagy ha már ezt megtették, akkor bejelentkezni
+* A regisztrációs menüben szerepel majd login és register funkció is
+* Az itt bevitt adatok egy adatbázisban tárolódnak
+* A regisztrációhoz, usernam, password és email rubrikákat kell kitölteni
+* A **Register** gomb lenyomása után, a beírt adatokat ellenőrzi a rendszer, ha ezek megfelelnek (emailben kukacosság, megfelelő jelszó, nem foglalt felhasználó) létrehozza az új felhasználót
+* A **Login** gomb lenyomásával pedig a beírt adatok alapján beléphet a már regisztrált felhasználó
+* A **Play** gomb megnyomásával, bekerülünk a játék főmenüjébe
+
+# Főmenü
+
+![asd1](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/menu.jpg)
+
+
+* **Character** gombra kattintva kiválaszthatjuk a játékbeli karakterünket, itt több lehetőségből választhatnak a játékosok
+* **Play** gombot megnyomva a játékos elkezdheti a játékot
+* **Credits** gombot megnyomva a játékos megtekintheti a készítők listáját
+* **TOP list** gombot megnyomva  a játékos megtekintheti az aktuális toplistát
+* **Exit** gombot megnyomva a játékos kilép az alkalmazásból
+* **Controls** gombot megnyomva a játékos megtekintheti azt, hogy miként lehet a karakterét irányítani a játékban
+* **Legend** gombra kattintva a játékos megnyithat egy jelmagyarázatot amiben el vannak magyarázva a játék alapvetői elemei és a pályán megjelenő objektumok 
+
+# Játékban
+
+![asd1](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/gamescreen.jpg)
+
+
+* W - fel
+* S - le
+* A - balra
+* D - jobbra
+* Space - ugrás
+* Bal egérgomb - lövés (fegyverrel)
+* ESC - megszakítás
+
 ## 7. Tesztterv:
 ### 7.1 Fő részek:
 * 7.1.1 teszt végrehajtása
@@ -56,5 +97,10 @@ A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és tov�
 * 8.2 Szükség van még a nyílt forráskódú kivy programozói könyvtárra, amit erről a weboldalról lehet letölteni és telepíteni: https://kivy.org/doc/stable/gettingstarted/installation.html.
 * 8.3 MySQL adatbázis kezelő rendszerre van szükség: (<https://www.mysql.com/>)
 * 8.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
+
+## Fogalom szótár:
+* regisztrálás - beíratás, beiratkozás, bejegyezés, bejelentés, esetünkben a felhasználók közé
+* bejelentkezés - a rendszerbe
+* 
 
 
