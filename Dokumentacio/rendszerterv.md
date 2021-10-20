@@ -13,7 +13,8 @@ Feladatok és hatáskörök a Trello-n vannak kezelve.
 A projekt fő lekövetése Trello-n keresztül történik.  
 A gyors kommunikációra a Messengert használjuk.  
 A hosszas egyeztetésekre és meetingekre Discord szervert használunk.  
-Az elkészült elemeket Github-ra töltjük fel.  
+Az elkészült elemeket Github-ra töltjük fel.
+
 ### Projekten dolgozó fejlesztők:
 * Orosz Regina
 * Takács Balázs
@@ -53,4 +54,7 @@ A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és tov�
 ## 8. Telepítési terv:
 * 8.1 A program futtatásához python-ra van szükség amit a https://www.python.org/downloads/ weboldalról lehet telepíteni. A verziószámának 3.0+ - nak kell lennie.
 * 8.2 Szükség van még a nyílt forráskódú kivy programozói könyvtárra, amit erről a weboldalról lehet letölteni és telepíteni: https://kivy.org/doc/stable/gettingstarted/installation.html.
+* 8.3 MySQL adatbázis kezelő rendszerre van szükség: (<https://www.mysql.com/>)
+* 8.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
+
 
