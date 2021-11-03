@@ -99,8 +99,13 @@ A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és tov�
 * 8.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
 
 ## Fogalom szótár:
+* * Visual Studio Code - A Visual Studio Code egy ingyenes, nyílt forráskódú kódszerkesztő, melyet a Microsoft fejleszt Windows, Linux és OS X operációs rendszerekhez.
+* PyCharm - A PyCharm egy integrált fejlesztői környezet, amelyet a számítógépes programozásban használnak, kifejezetten a Python nyelv számára.
+* MySQL - A MySQL egy többfelhasználós, többszálú, SQL-alapú relációs adatbázis-kezelő szerver.
 * regisztrálás - beíratás, beiratkozás, bejegyezés, bejelentés, esetünkben a felhasználók közé
 * bejelentkezés - a rendszerbe
-* 
-
+* tesztelés - A szoftvertesztelés a szoftverminőség-biztosítás és így a szoftverfejlesztés részét képezi. A tesztelés egy rendszer vagy program kontrollált körülmények melletti futtatása, és az eredmények kiértékelése. A hagyományos megközelítés szerint a tesztelés célja az, hogy a fejlesztés során létrejövő hibákat minél korábban felfedezze, és ezzel csökkentse azok kijavításának költségeit.
+* kivy -  Kivy egy ingyenes és nyílt forráskódú Python-keretrendszer mobilalkalmazások és más, természetes felhasználói felülettel rendelkező multitouch alkalmazásszoftverek fejlesztésére.
+* python - A Python egy általános célú, nagyon magas szintű programozási nyelv.
+* archiválás - adat eltárolása, irattárba helyezés
 
