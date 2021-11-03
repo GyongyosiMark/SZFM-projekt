@@ -31,10 +31,26 @@ A rendszerterv az alábbi követelmények megvalósítását célozza meg:
 * a high-score jelenjen meg a menü felületén
 * az eredmények eltárolása adatbázisban
 
-## 5. Fizikai környezet:
+
+## 5. Ütemterv:
+* 2021.09.06. - 2021.09.12. - Project öteltelés és megbeszélése a csapattal.
+* 2021.09.13. - 2021.09.19. - Megbeszélés és a követlemény specifikációk elkezdése
+* 2021.09.20. - 2021.09.26. - Megbeszélés és a funkcionális specifikációk elkezdése és a rendszerterv elkezdése, Demo fejlesztés elkezdése.
+* 2021.09.27. - 2021.10.03. - A követlemény specifikációk, funkcionális specifikációk és rendszerterv 
+* 2021.10.04. - 2021.10.10. - Demo, követlemény specifikációk, funkcionális specifikációk, rendszerterv bemutatása
+* 2021.10.11. - 2021.10.17. - 
+* 2021.10.18. - 2021.10.24. - 
+* 2021.10.25. - 2021.10.31. - 
+* 2021.11.01. - 2021.11.07. - 
+* 2021.11.08. - 2021.11.14. - 
+* 2021.11.15. - 2021.11.21. - 
+* 2021.11.22. - 2021.11.28. - 
+* 2021.11.29. - 2021.12.05. - 
+
+## 6. Fizikai környezet:
 A játékot Visual Studio Code, valamint PyCharm fejlesztőeszközök segítségével fogjuk fejleszteni. A fejlesztés során alkalmazni fogjuk a Kivy, a Tkinter librarykat pythonhoz, valamint használni fogunk MySQL adatbázist is az eredmények eltárolása érdekében. A játék PC platformon lesz elérhető.
 
-## 6. Absztrakt domain modell:
+## 7. Absztrakt domain modell:
 A programunkban az MVC programtervezési mintát követjük. Ez a minta három részből áll: Modell, Nézet, és Vezérlő.
 A modell valósítja meg az üzleti logikát.
 A nézet felel a felhaszálói felület megjelenítéséért. Itt jelenik meg a felhasználónak szánt adatok.
@@ -81,25 +97,25 @@ A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és tov�
 * Bal egérgomb - lövés (fegyverrel)
 * ESC - megszakítás
 
-## 7. Tesztterv:
-### 7.1 Fő részek:
-* 7.1.1 teszt végrehajtása
-* 7.1.2 észrevételek dokumentálása
-* 7.1.3 teszt dokumentáció archiválása
+## 8. Tesztterv:
+### 8.1 Fő részek:
+* 8.1.1 teszt végrehajtása
+* 8.1.2 észrevételek dokumentálása
+* 8.1.3 teszt dokumentáció archiválása
 
-### 7.2 A tesztelést manuálisan kell végrehajtani. A teszt akkor sikeres, ha a program minden komponensét átnézve (ebben értendő az ellenféllel való harc, a saját karakter mozgatása, regisztrálás, belépés) rendben működik és nem kapunk hibaüzentet vagy programleállást.
+### 8.2 A tesztelést manuálisan kell végrehajtani. A teszt akkor sikeres, ha a program minden komponensét átnézve (ebben értendő az ellenféllel való harc, a saját karakter mozgatása, regisztrálás, belépés) rendben működik és nem kapunk hibaüzentet vagy programleállást.
 
-### 7.3 A manuális tesztelés során egy tesztjegyzőkönyvet kell készíteni amiben dokumentálva van a tesztelt funkció annak elvárt viselkedése, a funkció által adott viselkedés és az, hogy ez sikeres/sikertelen.
+### 8.3 A manuális tesztelés során egy tesztjegyzőkönyvet kell készíteni amiben dokumentálva van a tesztelt funkció annak elvárt viselkedése, a funkció által adott viselkedés és az, hogy ez sikeres/sikertelen.
 
 
-## 8. Telepítési terv:
-* 8.1 A program futtatásához python-ra van szükség amit a https://www.python.org/downloads/ weboldalról lehet telepíteni. A verziószámának 3.0+ - nak kell lennie.
-* 8.2 Szükség van még a nyílt forráskódú kivy programozói könyvtárra, amit erről a weboldalról lehet letölteni és telepíteni: https://kivy.org/doc/stable/gettingstarted/installation.html.
-* 8.3 MySQL adatbázis kezelő rendszerre van szükség: (<https://www.mysql.com/>)
-* 8.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
+## 9. Telepítési terv:
+* 9.1 A program futtatásához python-ra van szükség amit a https://www.python.org/downloads/ weboldalról lehet telepíteni. A verziószámának 3.0+ - nak kell lennie.
+* 9.2 Szükség van még a nyílt forráskódú kivy programozói könyvtárra, amit erről a weboldalról lehet letölteni és telepíteni: https://kivy.org/doc/stable/gettingstarted/installation.html.
+* 9.3 MySQL adatbázis kezelő rendszerre van szükség: (<https://www.mysql.com/>)
+* 9.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
 
 ## Fogalom szótár:
-* * Visual Studio Code - A Visual Studio Code egy ingyenes, nyílt forráskódú kódszerkesztő, melyet a Microsoft fejleszt Windows, Linux és OS X operációs rendszerekhez.
+* Visual Studio Code - A Visual Studio Code egy ingyenes, nyílt forráskódú kódszerkesztő, melyet a Microsoft fejleszt Windows, Linux és OS X operációs rendszerekhez.
 * PyCharm - A PyCharm egy integrált fejlesztői környezet, amelyet a számítógépes programozásban használnak, kifejezetten a Python nyelv számára.
 * MySQL - A MySQL egy többfelhasználós, többszálú, SQL-alapú relációs adatbázis-kezelő szerver.
 * regisztrálás - beíratás, beiratkozás, bejegyezés, bejelentés, esetünkben a felhasználók közé
