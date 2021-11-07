@@ -97,6 +97,12 @@ A vezérlő egy kapcsoló elem. Fogadja a felhasználói utasításokat és tov�
 * Bal egérgomb - lövés (fegyverrel)
 * ESC - megszakítás
 
+# Adatbázis terve
+
+Az adatbázis felépítési terve
+
+![asd1](https://github.com/Kaiusz/SZFM-projekt/blob/main/Dokumentacio/img/database.png)
+
 ## 8. Tesztterv:
 ### 8.1 Fő részek:
 * 8.1.1 teszt végrehajtása
