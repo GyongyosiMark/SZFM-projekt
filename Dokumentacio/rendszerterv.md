@@ -36,16 +36,16 @@ A rendszerterv az alábbi követelmények megvalósítását célozza meg:
 * 2021.09.06. - 2021.09.12. - Project öteltelés és megbeszélése a csapattal.
 * 2021.09.13. - 2021.09.19. - Megbeszélés és a követlemény specifikációk elkezdése
 * 2021.09.20. - 2021.09.26. - Megbeszélés és a funkcionális specifikációk elkezdése és a rendszerterv elkezdése, Demo fejlesztés elkezdése.
-* 2021.09.27. - 2021.10.03. - A követlemény specifikációk, funkcionális specifikációk és rendszerterv 
+* 2021.09.27. - 2021.10.03. - A követlemény specifikációk, funkcionális specifikációk és rendszertervek a Demora megfelelő állapotra hozása
 * 2021.10.04. - 2021.10.10. - Demo, követlemény specifikációk, funkcionális specifikációk, rendszerterv bemutatása
-* 2021.10.11. - 2021.10.17. - 
-* 2021.10.18. - 2021.10.24. - 
-* 2021.10.25. - 2021.10.31. - 
-* 2021.11.01. - 2021.11.07. - 
-* 2021.11.08. - 2021.11.14. - 
-* 2021.11.15. - 2021.11.21. - 
-* 2021.11.22. - 2021.11.28. - 
-* 2021.11.29. - 2021.12.05. - 
+* 2021.10.11. - 2021.10.17.
+* 2021.10.18. - 2021.10.24.
+* 2021.10.25. - 2021.10.31.
+* 2021.11.01. - 2021.11.07.
+* 2021.11.08. - 2021.11.14. - Dokumentáió befejezése
+* 2021.11.15. - 2021.11.21. - Project fejlesztése
+* 2021.11.22. - 2021.11.28.
+* 2021.11.29. - 2021.12.05. - Project befejezése
 
 ## 6. Fizikai környezet:
 A játékot Visual Studio Code, valamint PyCharm fejlesztőeszközök segítségével fogjuk fejleszteni. A fejlesztés során alkalmazni fogjuk a Kivy, a Tkinter librarykat pythonhoz, valamint használni fogunk MySQL adatbázist is az eredmények eltárolása érdekében. A játék PC platformon lesz elérhető.
