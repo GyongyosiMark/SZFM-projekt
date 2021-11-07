@@ -77,6 +77,7 @@ A tábor egyik különlegessége az, hogy itt nem csak a már jól ismert játé
 * a játék felülete legyen egyszerű
 * a menü legyen egyértelmű és egyszerű
 * a high-score jelenjen meg a menü felületén
+* a pontszámok kerüljenek eltárolásra adatbázisban
 
 ## 6. Irányított és szabad szöveges riportok szövege: 
 
