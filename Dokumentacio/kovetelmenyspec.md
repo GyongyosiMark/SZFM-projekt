@@ -1,9 +1,11 @@
 # Követelmény Specifikáció
 
 ## 1. Jelenlegi helyzet leírása:
-A True Gamer gaming tábor egy felejthetetlen élményt nyújt mindenkinek, aki szívesen tölti az idejét videójátékokozással, vagy éppen most szeretne megismerkedni a videójátékok világával.
-A résztvevők egy héten keresztül fejleszthetik tudásukat a táborvezetők segítségével. Az utolsó napon, a különböző játékokban a legjobban teljesítők értékes jutalmakat kapnak a teljesítményükért.
-A tábor egyik különlegessége az, hogy itt nem csak a már jól ismert játékokban mérhetik össze a tudásukat a résztvevők, hanem egy kifejezetten erre az alkalomra fejlesztett játékban is kipróbálhatják magukat. 
+A True Gamer gaming tábor egy felejthetetlen élményt nyújt mindenkinek, aki szívesen tölti az idejét videójátékokozással, vagy éppen most szeretne megismerkedni a videójátékok világával. A résztvevők egy héten keresztül fejleszthetik tudásukat a táborvezetőink segítségével.
+A táborozókat az első napon két csoportba lesznek osztva tudásuk szerint. Az első csoportba fognak tartozni azok a játékosok, akik még csak most csöppennek bele a játékok világába, vagy csak nagyon kevés tapasztalattal rendelkeznek. Ők a játékokat az alap szinttől sajátítják el, kezdve az irányítással, és az alapvető játékmechanika megismerésével.
+A második csoporba kerülnek azok, akik már némi tapasztalattal rendelkeznek a játékok területén. Velük nehány bemelegítő kör után elkezdünk pár magasabb szintű praktikát is kipróbálni, valamint nagyobb gyakorlottságot igénylő takitákak átvenni.  
+Az utolsó napon, a különböző játékokban a legjobban teljesítők értékes jutalmakat kapnak a teljesítményükért.
+A tábor egyik különlegessége az, hogy itt nem csak a már jól ismert játékokban mérhetik össze a tudásukat a résztvevők, hanem egy kifejezetten erre az alkalomra fejlesztett játékban is kipróbálhatják magukat. Ezt főként a kezdő csoport számára fejlesztettük alap tudásuk könnyebb megszerzése érdekében. Segít a játék a billentyűzeten való irányítás gyakorlásában, az ellenfelekkel és fegyverekkel való bánásmód megismerésében valamint, mivel logikai elemeket is tartalmaz, ezért a játéklogikai késséget is fejleszti. A játékmechanika a szokásos platformer játékokat követi, ezáltal a játékban szerzett tapasztalatok hasznosak lesznek más játékok játszása közben is. 
 
 ## 2. Vágyálomrendszer leírása:
 <p>Mivel a True Gamer gaming tábor népszerűsége egyre csak nő, az idei évben szeretné meglepni a táborozókat egy saját kis játékkal, amely hozzájárul az egyéni fejlődéshez is,

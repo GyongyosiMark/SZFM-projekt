@@ -22,7 +22,12 @@ Mivel a tábor már több éve sikeresen működik, szeretnének a mostani megh�
 * 3.2.5 Készítők neve szerpeljen ✗
 
 ## 4. Használati leírás:
-* Játékos: A játébeli karaktert tudja mozgatni fel, le, jobbra, balra a pályán. Ha a karater érintkezik a képernyőn lévő ellenféllel, akkor azt érzékeli a program.
+Játékos: A játébeli karaktert az "A" gomb lenyomásával tudja mozgatni balra, az "S" gomb lenyomásával pedig jobbra a pályán. A pálya széle felé közelítve a pálya autómatikusan halad tovább. Ezen kívül még a "SPACE" gomb segítségével tud ugrani. Ugrással fel tud menni a játékban elhelyezett platformokra. A platformokról sétálással tud lejutni, egyszerűen csak leesik onnan a karakter de ez az esés nem okoz sebzést.
+A játék három különböző pálya részből áll, amik között létra, vagy lépcső segítségével tudunk mozogni, attól függően, hogy felfelé, vagy lefelé kell haladni.
+A pályán vannak ellenfelek, amik sebezni tudjál a karaktert. Ezek ellen úgy tud védekezni, hogy fel lehet venni különféle fegyvereket, amiket később az ellenfelek megölésére tud használni úgy, hogy közel megy hozzájuk és azzal sebzi őket. A másik módszer az, hogy csapdákat helyez az ellenség útjába amikbe az bele sétálva sebződik.
+A játék logikai elemeket is tartalmaz. Kapcsolók aktiválásával lehet pálya elemeket mozgatni, amik szükségesek a továbbjutáshoz.
+Haladás közben találkozhatunk érmékkel is, amiket fel tudunk venni úgy, hogy hozzá érünk. Ezek az érmék nem szükségesek a tovább jutáshoz, de pontokat érnek ezért érdemes megszerezni őket.
+A játék célja megtalálni a hercegnőt. Ha hozzá érünk, akkor az a játék végét jelenti, és az addig szerzett pontszámaink mentődnek. A másik módja, hogy véget érjen a játék az, hogy az életeink száma 0 legyen. Ekkor még a hercegnő megtalálása előtt véget ér a játék és a pontszámok nem lesznek elmentve.
 
 ## 5. Megfeleltetés, hogyan fedik le a használati esetek a követelményeket
 
