@@ -10,6 +10,7 @@ A cég igazgatója szeretne egy olyen játékot, ami az ő elképezelése alapj�
 hogy egyrészt egy olyat készíthessenek ami több korosztály számára is megfelelő, másrészt ennek a játéknak
 oktató jellegűnek és szorakoztatónak is kellene lennie. Egy ilyen játék nagyban megdobná a tábor presztizsét,
 még ha nem is küszködnek ilyen gondokkal, illetve marketing fogásként is nagyszerű.
+Mivel a tábor már több éve sikeresen működik, szeretnének a mostani meghírdetett táborokba valami különlegeset vinni, ezért is gondoltak erre, hogy egy játékot készítenek.
 
 ## 3. Igényelt Üzleti Folyamatok Modellje
 ### 3.1 Az igényelt termék egy játék, nem szükségesek komplex üzleti modellek. ✓
