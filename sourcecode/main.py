@@ -1,5 +1,82 @@
 import pygame
 from pygame.locals import *
+import tkinter as tk
+import mysql.connector
+import getpass
+from sourcecode.main import init_database
+
+# Eltárolja a játékos nevét, bejelentkezés után ez megváltozik
+
+current_player = "guest"
+
+
+# inicializálja az adatbázist, bejelentkezés szükséges hozzá
+def init_database():
+    database_username = input("Database username: ")
+    database_password = getpass.getpass("Database password: ")
+
+    my_database = mysql.connector.connect(
+        host="localhost",
+        user=database_username,
+        passwd=database_password
+    )
+
+    my_cursor = my_database.cursor()
+    my_cursor.execute("CREATE DATABASE IF NOT EXISTS loginSystem;")
+
+    my_database = mysql.connector.connect(
+        host="localhost",
+        user=database_username,
+        passwd=database_password,
+        database="loginSystem"
+    )
+
+    my_cursor = my_database.cursor()
+
+    my_cursor.execute("""CREATE TABLE IF NOT EXISTS users(
+        id MEDIUMINT NOT NULL AUTO_INCREMENT,
+        username VARCHAR(30) NOT NULL,
+        password VARCHAR(30) NOT NULL,
+        email VARCHAR(30) NOT NULL,
+        PRIMARY KEY (id, username),
+        UNIQUE (id),
+        UNIQUE (username),
+        UNIQUE(email)
+    );""")
+
+    return my_database, my_cursor
+
+
+# regisztrál egy felhasználót az adatbázisba (még nincs titkosítva a jelszó)
+def register():
+    try:
+        my_cursor.execute("SELECT MAX(id + 1) FROM users")
+        id = my_cursor.fetchall()[0][0]
+        if not id:
+            id = 1
+        my_cursor.execute(f"""
+        INSERT INTO users (id, username, password, email)
+        VALUES ({id}, '{r1.get()}', '{r2.get()}', '{r3.get()}')
+        """)
+        my_database.commit()
+        print("Successfully registered.")
+    except mysql.connector.errors.IntegrityError:
+        print("The username or email is already taken.")
+        my_database.rollback()
+
+
+# Megnézi, hogy a bejelentkezéshez megadott felhasználónév-jelszó páros létezik-e, ha igen akkor bejelentkezik.
+def login():
+    my_cursor.execute(f"SELECT password FROM users WHERE username = '{e1.get()}'")
+    result = my_cursor.fetchall()
+    if len(result) == 0:
+        print("This username does not exist.")
+    else:
+        if result[0][0] == e2.get():
+            current_player = e1.get()
+            print("Login successful")
+        else:
+            print("Invalid username or password")
 
 pygame.init()
 
@@ -40,54 +117,54 @@ class Player:
         self.vel_y = 0
         self.jumped = False
 
-    def update(self):
-        dx = 0
+def update(self):
+    dx = 0
+    dy = 0
+
+    # input a billentyukrol
+    key = pygame.key.get_pressed()
+    if key[pygame.K_SPACE] and self.jumped == False:
+        self.vel_y = -15
+        self.jumped = True
+    if not key[pygame.K_SPACE]:
+        self.jumped = False
+    if key[pygame.K_LEFT]:
+        dx -= 5
+    if key[pygame.K_RIGHT]:
+        dx += 5
+
+    # gravitacio
+    self.vel_y += 1
+    if self.vel_y > 10:
+        self.vel_y = 10
+    dy += self.vel_y
+
+    #utkozes TO DO
+    for tile in world.tile_list:
+        # vizsszintes utkozes
+        if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
+            dx = 0
+        # fuggoleges utkozes
+        if tile[1].colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
+            # alulrol utkozes blokkal, ugrasnal
+            if self.vel_y < 0:
+                dy = tile[1].bottom - self.rect.top
+                self.vel_y = 0
+            # felulrol utkozes blokkal, esesnel
+            elif self.vel_y >= 0:
+                dy = tile[1].top - self.rect.bottom
+                self.vel_y = 0
+
+    # player poziziojanak frissittese
+    self.rect.x += dx
+    self.rect.y += dy
+
+    if self.rect.bottom > screen_height:
+        self.rect.bottom = screen_height
         dy = 0
 
-        # input a billentyukrol
-        key = pygame.key.get_pressed()
-        if key[pygame.K_SPACE] and self.jumped == False:
-            self.vel_y = -15
-            self.jumped = True
-        if not key[pygame.K_SPACE]:
-            self.jumped = False
-        if key[pygame.K_LEFT]:
-            dx -= 5
-        if key[pygame.K_RIGHT]:
-            dx += 5
-
-        # gravitacio
-        self.vel_y += 1
-        if self.vel_y > 10:
-            self.vel_y = 10
-        dy += self.vel_y
-
-        #utkozes TO DO
-        for tile in world.tile_list:
-            # vizsszintes utkozes
-            if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
-                dx = 0
-            # fuggoleges utkozes
-            if tile[1].colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
-                # alulrol utkozes blokkal, ugrasnal
-                if self.vel_y < 0:
-                    dy = tile[1].bottom - self.rect.top
-                    self.vel_y = 0
-                # felulrol utkozes blokkal, esesnel
-                elif self.vel_y >= 0:
-                    dy = tile[1].top - self.rect.bottom
-                    self.vel_y = 0
-
-        # player poziziojanak frissittese
-        self.rect.x += dx
-        self.rect.y += dy
-
-        if self.rect.bottom > screen_height:
-            self.rect.bottom = screen_height
-            dy = 0
-
-        # player rajzolasa a kepenyore
-        screen.blit(self.image, self.rect)
+    # player rajzolasa a kepenyore
+    screen.blit(self.image, self.rect)
 
 #palya osztalya
 class World:
@@ -99,73 +176,108 @@ class World:
         grass_img = pygame.image.load('../animation/grass.png')
 
 #feldolgozza az arrayt ami a map infot tartalmazza
-        row_count = 0
-        for row in data:
-            col_count = 0
-            for tile in row:
-                if tile == 1:
-                    img = pygame.transform.scale(dirt_img, (tile_size, tile_size))
-                    img_rect = img.get_rect()
-                    img_rect.x = col_count * tile_size
-                    img_rect.y = row_count * tile_size
-                    tile = (img, img_rect)
-                    self.tile_list.append(tile)
-                if tile == 2:
-                    img = pygame.transform.scale(grass_img, (tile_size, tile_size))
-                    img_rect = img.get_rect()
-                    img_rect.x = col_count * tile_size
-                    img_rect.y = row_count * tile_size
-                    tile = (img, img_rect)
-                    self.tile_list.append(tile)
-                col_count += 1
-            row_count += 1
+    row_count = 0
+    for row in data:
+        col_count = 0
+        for tile in row:
+            if tile == 1:
+                img = pygame.transform.scale(dirt_img, (tile_size, tile_size))
+                img_rect = img.get_rect()
+                img_rect.x = col_count * tile_size
+                img_rect.y = row_count * tile_size
+                tile = (img, img_rect)
+                self.tile_list.append(tile)
+            if tile == 2:
+                img = pygame.transform.scale(grass_img, (tile_size, tile_size))
+                img_rect = img.get_rect()
+                img_rect.x = col_count * tile_size
+                img_rect.y = row_count * tile_size
+                tile = (img, img_rect)
+                self.tile_list.append(tile)
+            col_count += 1
+        row_count += 1
 
-    def draw(self):
-        for tile in self.tile_list:
-            screen.blit(tile[0], tile[1])
+def draw(self):
+    for tile in self.tile_list:
+        screen.blit(tile[0], tile[1])
 
 #a map abrazolasa
 world_data = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
-    [1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 2, 2, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 7, 0, 5, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1],
-    [1, 7, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 1],
-    [1, 0, 2, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 0, 2, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 1],
-    [1, 0, 0, 0, 0, 0, 2, 2, 2, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
+[1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 2, 2, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 7, 0, 5, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1],
+[1, 7, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 1],
+[1, 0, 2, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 0, 2, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 1],
+[1, 0, 0, 0, 0, 0, 2, 2, 2, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1],
+[1, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 #peldanyositas az osztalyokbol
-player = Player(100, screen_height)
-world = World(world_data)
+def main():
+    window = tk.Tk()
+    window.title('Hello Python')
+    window.geometry("600x600")
 
-run = True
-while run:
+    # Rendkívül kezdetleges GUI a bejelentkezéshez.
+    try:
+        my_database, my_cursor = init_database()
+    except mysql.connector.errors.ProgrammingError:
+        print("Invalid username or password.")
+        exit()
+    tk.Label(window, text="Username").pack()
+    e1 = tk.Entry(window)
+    e1.pack()
+    tk.Label(window, text="Password").pack()
+    e2 = tk.Entry(window, show="*")
+    e2.pack()
+    tk.Button(window, text="Login", command=login).pack()
+    tk.Label(window, text="").pack()
+    tk.Label(window, text="Username").pack()
+    r1 = tk.Entry(window)
+    r1.pack()
+    tk.Label(window, text="Password").pack()
+    r2 = tk.Entry(window, show="*")
+    r2.pack()
+    tk.Label(window, text="Email").pack()
+    r3 = tk.Entry(window)
+    r3.pack()
+    tk.Button(window, text="Register", command=register).pack()
+    tk.Label(window, text="").pack()
+    tk.Button(window, text="Play", command=window.destroy).pack()
+    window.mainloop()
+    player = Player(100, screen_height)
+    world = World(world_data)
 
-    clock.tick(fps)
-    screen.blit(bg_img, (0, 0))
+    run = True
+    while run:
 
-    world.draw()
-    player.update()
+        clock.tick(fps)
+        screen.blit(bg_img, (0, 0))
 
-    draw_grid()
+        world.draw()
+        player.update()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+        draw_grid()
 
-    pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
 
-pygame.quit()
+        pygame.display.update()
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
