@@ -119,8 +119,8 @@ clock = pygame.time.Clock()
 fps = 60
 
 #screen merete
-screen_width = 800 #1000
-screen_height = 800 #1000
+screen_width = 1000
+screen_height = 1000
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Platformer')
@@ -184,6 +184,7 @@ class Player:
         self.height = self.image.get_height()
         self.vel_y = 0
         self.jumped = False
+        self.in_air = True
 
     def update(self):
         dx = 0
@@ -191,7 +192,7 @@ class Player:
 
         # input a billentyukrol
         key = pygame.key.get_pressed()
-        if key[pygame.K_SPACE] and self.jumped == False:
+        if key[pygame.K_SPACE] and self.jumped == False and self.in_air == False:
             self.vel_y = -15
             self.jumped = True
         if not key[pygame.K_SPACE]:
@@ -208,6 +209,7 @@ class Player:
         dy += self.vel_y
 
         #utkozes TO DO
+        self.in_air = True
         for tile in world.tile_list:
             # vizsszintes utkozes
             if tile[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
@@ -222,6 +224,7 @@ class Player:
                 elif self.vel_y >= 0:
                     dy = tile[1].top - self.rect.bottom
                     self.vel_y = 0
+                    self.in_air = False
 
         # player poziziojanak frissittese
         self.rect.x += dx
