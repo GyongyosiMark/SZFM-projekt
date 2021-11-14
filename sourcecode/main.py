@@ -2,14 +2,12 @@
 import pygame
 from pygame.locals import *
 import tkinter as tk
-import mysql.connector
 import getpass
 import os
 
 current_player = "guest"
 
 ################################################################################################
-
 def init_database():
     try:
         database_username = os.environ["database_name"]
@@ -120,23 +118,57 @@ clock = pygame.time.Clock()
 fps = 60
 
 #screen merete
-screen_width = 1000
-screen_height = 1000
+screen_width = 800 #1000
+screen_height = 800 #1000
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Platformer')
 
 # a jatekbeli blokkok merete
 tile_size = 50
+main_manu = True
 
 # blokkok aniamacioja
 bg_img = pygame.image.load('../animation/sky.png')
+
+# kepek betoltese
+start_img = pygame.image.load('../animation/start_button.png')
+exit_img = pygame.image.load('../animation/exit_button.png')
+highscore_img = pygame.image.load('../animation/highscore_button.png')
 
 #negyzethalo a fejleszteshez
 def draw_grid():
     for line in range(0, 20):
         pygame.draw.line(screen, (255, 255, 255), (0, line * tile_size), (screen_width, line * tile_size))
         pygame.draw.line(screen, (255, 255, 255), (line * tile_size, 0), (line * tile_size, screen_height))
+
+class Button():
+    def __init__(self, x, y, image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.clicked = False
+
+    def draw(self):
+        action = False
+
+        #egér pozicio
+        pos = pygame.mouse.get_pos()
+
+        #egérmutató/kattintas
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                action = True
+                self.clicked = True
+        
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+
+        #gomb megrajzolasa
+        screen.blit(self.image, self.rect)
+
+        return action
 
 #player osztaly
 class Player:
@@ -263,16 +295,29 @@ world_data = [
 player = Player(100, screen_height)
 world = World(world_data)
 
+#gombok létrehozása
+start_button = Button(screen_width // 2 - 300, screen_height // 2, start_img)
+exit_button = Button(screen_width // 2 + 100, screen_height // 2, exit_img)
+highscore_button = Button(screen_width // 2 - 100, screen_height // 2 + 150, highscore_img)
+
 run = True
 while run:
 
     clock.tick(fps)
     screen.blit(bg_img, (0, 0))
 
-    world.draw()
-    player.update()
+    if main_manu == True:
+        if start_button.draw() == True:
+            main_manu = False
+        if exit_button.draw() == True:
+            run = False
+        if highscore_button.draw() == True:
+            pass
+    else:    
+        world.draw()
+        player.update()
 
-    draw_grid()
+        draw_grid()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
