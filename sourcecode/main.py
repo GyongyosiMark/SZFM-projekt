@@ -2,6 +2,7 @@
 import pygame
 from pygame.locals import *
 import tkinter as tk
+import mysql.connector
 import getpass
 import os
 
