@@ -185,6 +185,8 @@ class Player:
         self.vel_y = 0
         self.jumped = False
         self.in_air = True
+        self.direction = 1
+        self.flip = False
 
     def update(self):
         dx = 0
@@ -199,8 +201,12 @@ class Player:
             self.jumped = False
         if key[pygame.K_LEFT]:
             dx -= 5
+            self.flip = True
+            self.direction = -1
         if key[pygame.K_RIGHT]:
             dx += 5
+            self.flip = False
+            self.direction = 1
 
         # gravitacio
         self.vel_y += 1
@@ -235,7 +241,7 @@ class Player:
             dy = 0
 
         # player rajzolasa a kepenyore
-        screen.blit(self.image, self.rect)
+        screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
 
 #palya osztalya
 class World:
