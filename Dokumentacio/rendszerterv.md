@@ -49,7 +49,7 @@ A rendszerterv az alábbi követelmények megvalósítását célozza meg:
 * 2021.11.29. - 2021.12.05. - Project befejezése és bemutatása a megrendelőnek
 
 ## 6. Fizikai környezet:
-A játékot Visual Studio Code, valamint PyCharm fejlesztőeszközök segítségével fogjuk fejleszteni. A fejlesztés során alkalmazni fogjuk a Kivy, a Tkinter librarykat pythonhoz, valamint használni fogunk MySQL adatbázist is az eredmények eltárolása érdekében. A játék PC platformon lesz elérhető.
+A játékot Visual Studio Code, valamint PyCharm fejlesztőeszközök segítségével fogjuk fejleszteni. A fejlesztés során alkalmazni fogjuk a pygame, a Tkinter librarykat pythonhoz, valamint használni fogunk MySQL adatbázist is az eredmények eltárolása érdekében. A játék PC platformon lesz elérhető.
 
 ## 7. Absztrakt domain modell:
 A programunkban az MVC programtervezési mintát követjük. Ez a minta három részből áll: Modell, Nézet, és Vezérlő.
@@ -117,7 +117,7 @@ Az adatbázis felépítési terve
 
 ## 9. Telepítési terv:
 * 9.1 A program futtatásához python-ra van szükség amit a https://www.python.org/downloads/ weboldalról lehet telepíteni. A verziószámának 3.0+ - nak kell lennie.
-* 9.2 Szükség van még a nyílt forráskódú kivy programozói könyvtárra, amit erről a weboldalról lehet letölteni és telepíteni: https://kivy.org/doc/stable/gettingstarted/installation.html.
+* 9.2 Szükség van még a pygame programozói könyvtárra, amit erről a weboldalról lehet letölteni és telepíteni: https://www.pygame.org/docs/.
 * 9.3 MySQL adatbázis kezelő rendszerre van szükség: (<https://www.mysql.com/>)
 * 9.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
 
@@ -128,7 +128,7 @@ Az adatbázis felépítési terve
 * regisztrálás - beíratás, beiratkozás, bejegyezés, bejelentés, esetünkben a felhasználók közé
 * bejelentkezés - a rendszerbe
 * tesztelés - A szoftvertesztelés a szoftverminőség-biztosítás és így a szoftverfejlesztés részét képezi. A tesztelés egy rendszer vagy program kontrollált körülmények melletti futtatása, és az eredmények kiértékelése. A hagyományos megközelítés szerint a tesztelés célja az, hogy a fejlesztés során létrejövő hibákat minél korábban felfedezze, és ezzel csökkentse azok kijavításának költségeit.
-* kivy -  Kivy egy ingyenes és nyílt forráskódú Python-keretrendszer mobilalkalmazások és más, természetes felhasználói felülettel rendelkező multitouch alkalmazásszoftverek fejlesztésére.
+* pygame -  A pygame egy ingyenes Python-keretrendszer alkalmazások és más, természetes felhasználói felülettel rendelkező multitouch alkalmazásszoftverek fejlesztésére.
 * python - A Python egy általános célú, nagyon magas szintű programozási nyelv.
 * archiválás - adat eltárolása, irattárba helyezés
 
