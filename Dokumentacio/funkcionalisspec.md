@@ -18,7 +18,7 @@ Mivel a tábor már több éve sikeresen működik, szeretnének a mostani megh�
 * 3.2.1 Top lista ✗
 * 3.2.2 Pontok számítása ✗
 * 3.2.3 Asztali számítógépen megjeleníthető legyen ✓
-* 3.2.4 Menüsor legyen (Exit, Play) ✗
+* 3.2.4 Menüsor legyen (Exit, Play) ✓
 * 3.2.5 Készítők neve szerpeljen ✗
 
 ## 4. Használati leírás:
@@ -35,7 +35,7 @@ A játék célja megtalálni a hercegnőt. Ha hozzá érünk, akkor az a játék
 * a játékban jelenjen meg, hogy a játékos hogyan tudja irányítani a karakterét ✓
 * a játékban lehessen pontokat gyűjteni a megölt ellenfelek után és ezt egy számláló mutassa az egyik sarokban ✗
 * a játék felülete legyen egyszerű ✓
-* a menü legyen egyértelmű és egyszerű ✗
+* a menü legyen egyértelmű és egyszerű ✓
 * a high-score jelenjen meg a menü felületén ✗
 
 ## 6. Képernyő tervek:
