@@ -77,13 +77,13 @@ ha belemegyünk.</p>
 
 ## 8. Funkció – követelmény megfeleltetés.
 * 8.1 A program futtatásához Python 3-ra van szükségünk: (<https://www.python.org/>)
-* 8.2 A futtatáshoz Kivy programzói könyvtárra van szükségünk: (<https://kivy.org/>)
+* 8.2 A futtatáshoz pygame programzói könyvtárra van szükségünk: (<https://www.pygame.org/>)
 * 8.3 MySQL adatbázis kezelő rendszerre van szükség: (<https://www.mysql.com/>)
 * 8.4 Programozói környezetre is szükség van, ajánlott : Visual Studio (<https://visualstudio.microsoft.com/>) vagy Pycharm (<https://www.jetbrains.com/pycharm/>)
 
 
 ## 9. Fogalomszótár:
-* 9.1 Kivy - A Kivy egy nyílt forráskódú Python programozói könyvtár, gyors alkalmazásfejlesztéshez, ami újszerű felhasználói felületet használ, mint a többérintéses alkalmazások. A Kivy program fut Linuxon, Windowson, macOS-en, Androidon, iOS-en, és Raspberry Pi-n. Ugyanaz a kód futhat minden platformon.
+* 9.1 pygame - A pygame egy Python programozói könyvtár, gyors alkalmazásfejlesztéshez, ami újszerű felhasználói felületet használ, mint a többérintéses alkalmazások. A pygame program fut Linuxon, Windowson, macOS-en, Androidon, iOS-en, és Raspberry Pi-n. Ugyanaz a kód futhat minden platformon.
 * 9.2 Python - A Python egy könnyen tanulható, de hatékony programozási nyelv. Magasszintű adatstruktúrái, az objektum-orientáltság egyszerű megközelítése, elegáns szintaxisa, dinamikus típusossága és interpreteres mivolta ideális script-nyelvvé teszi.
 * 9.3 MySQL - A MySQL egy többfelhasználós, többszálú, SQL-alapú relációs adatbázis-kezelő szerver.
 * Videójáték - A videojátékok olyan elektronikus játékszoftverek, amelyeket szórakoztatás céljából fejlesztettek ki olyan elektronikus eszközökön keresztül, mint például játéktermek, konzolok, számítógépek vagy digitális eszközök.
