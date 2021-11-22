@@ -5,7 +5,7 @@
   * 4 tagú fejlesztői csapat
   * A projekt futási ideje 12 hét (4 hét + 8 hét)
   * Heti 5 nap
-  * Napi 2 óra
+  * Napi 1 óra
   * 4000 forintos órabér
   * Hetekre lebontott ütemterv
 
@@ -27,4 +27,4 @@
 | 13  | 2021.11.29 | 2021.12.05 | Project befejezése és bemutatása a megrendelőnek  
 
 
-### Az így kapott összeg NETTÓ 1,920,000 FT
+### Az így kapott összeg NETTÓ 960,000 FT
