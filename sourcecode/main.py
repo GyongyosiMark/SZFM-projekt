@@ -137,6 +137,7 @@ bg_img = pygame.image.load('../animation/sky.png')
 start_img = pygame.image.load('../animation/start_button.png')
 exit_img = pygame.image.load('../animation/exit_button.png')
 highscore_img = pygame.image.load('../animation/highscore_button.png')
+restart_img = pygame.image.load('../animation/restart_btn.png')
 
 #negyzethalo a fejleszteshez
 def draw_grid():
@@ -175,20 +176,8 @@ class Button():
 #player osztaly
 class Player:
     def __init__(self, x, y):
-        #player animacio, pozicio, mozgas
-        img = pygame.image.load('../animation/p1_stand.png')
-        self.image = pygame.transform.scale(img, (40, 80))
-        self.dead_image = pygame.image.load("../animation/ghost.png")
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.width = self.image.get_width()
-        self.height = self.image.get_height()
-        self.vel_y = 0
-        self.jumped = False
-        self.in_air = True
-        self.direction = 1
-        self.flip = False
+        # a resetbe lett áthelyezve
+        self.reset(x, y)
 
     def update(self, game_over):
         dx = 0
@@ -233,6 +222,12 @@ class Player:
                         dy = tile[1].top - self.rect.bottom
                         self.vel_y = 0
                         self.in_air = False
+
+            # lavaval utkozes
+            if pygame.sprite.spritecollide(self, lava_group, False):
+                game_over = -1
+
+            #enemyvel utkozes
             if pygame.sprite.spritecollide(self, enemy_group, False):
                 game_over = -1
 
@@ -252,6 +247,23 @@ class Player:
         screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
 
         return game_over
+
+    def reset(self, x , y):
+        #player animacio, pozicio, mozgas
+        img = pygame.image.load('../animation/p1_stand.png')
+        self.dead_image = pygame.image.load('../animation/ghost.png')
+        self.image = pygame.transform.scale(img, (40, 80))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+        self.vel_y = 0
+        self.jumped = False
+        self.in_air = True
+        self.direction = 1
+        self.flip = False
+
 
 #palya osztalya
 class World:
@@ -284,6 +296,9 @@ class World:
                 if tile == 3:
                     enemy = Enemy(col_count * tile_size, row_count * tile_size)
                     enemy_group.add(enemy)
+                if tile == 6:
+                    lava = Lava(col_count * tile_size, row_count * tile_size + (tile_size // 2))
+                    lava_group.add(lava)
                 col_count += 1
             row_count += 1
 
@@ -307,6 +322,18 @@ class Enemy(pygame.sprite.Sprite):
         if abs(self.move_counter) > 50:
             self.move_direction *= -1
             self.move_counter *= -1
+
+
+class Lava(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        img = pygame.image.load('../animation/lava.png')
+        self.image = pygame.transform.scale(img, (tile_size, tile_size // 2))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+
 #a map abrazolasa
 world_data = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -334,12 +361,15 @@ world_data = [
 #peldanyositas az osztalyokbol
 player = Player(100, screen_height)
 enemy_group = pygame.sprite.Group()
+lava_group = pygame.sprite.Group()
 world = World(world_data)
 
 #gombok létrehozása
 start_button = Button(screen_width // 2 - 300, screen_height // 2, start_img)
 exit_button = Button(screen_width // 2 + 100, screen_height // 2, exit_img)
 highscore_button = Button(screen_width // 2 - 100, screen_height // 2 + 150, highscore_img)
+restart_button = Button(screen_width // 2 - 50, screen_height // 2 +  100, restart_img)
+
 
 run = True
 while run:
@@ -359,8 +389,14 @@ while run:
         if game_over == 0:
             enemy_group.update()
 
+        lava_group.draw(screen)
         enemy_group.draw(screen)
         game_over = player.update(game_over)
+
+        if game_over == -1:
+            if restart_button.draw():
+                player.reset(100, screen_height)
+                game_over = 0
 
         #draw_grid()
 
