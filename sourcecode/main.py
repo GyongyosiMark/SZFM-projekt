@@ -131,7 +131,7 @@ main_manu = True
 game_over = 0
 
 # blokkok aniamacioja
-bg_img = pygame.image.load('../animation/sky.png')
+bg_img = pygame.image.load('../animation/bg1.png')
 
 # kepek betoltese
 start_img = pygame.image.load('../animation/start_button.png')
