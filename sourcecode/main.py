@@ -1,6 +1,7 @@
 
 import pygame
 from pygame.locals import *
+from pygame import mixer
 import tkinter as tk
 import mysql.connector
 import getpass
@@ -112,6 +113,8 @@ window.mainloop()
 
 ################################################################################################
 
+pygame.mixer.pre_init(44100, -16, 2, 512)
+mixer.init()
 pygame.init()
 
 #rogzitunk egy frissites szamlalot, hogy egyenlo legyen kulonbozo gepeken
@@ -138,6 +141,21 @@ start_img = pygame.image.load('../animation/start_button.png')
 exit_img = pygame.image.load('../animation/exit_button.png')
 highscore_img = pygame.image.load('../animation/highscore_button.png')
 restart_img = pygame.image.load('../animation/restart_btn.png')
+
+#jatek zene
+pygame.mixer.music.load('../sound/bgrm.wav')
+pygame.mixer.music.play(-1, 0.0, 5000)
+pygame.mixer.music.set_volume(0.05)
+coin_fx = pygame.mixer.Sound('../sound/coin.wav')
+coin_fx.set_volume(0.1)
+death_fx = pygame.mixer.Sound('../sound/death.wav')
+death_fx.set_volume(0.1)
+jump_fx = pygame.mixer.Sound('../sound/jump.wav')
+jump_fx.set_volume(0.05)
+win_fx = pygame.mixer.Sound('../sound/win.wav')
+win_fx.set_volume(0.1)
+
+
 
 #negyzethalo a fejleszteshez
 def draw_grid():
@@ -186,6 +204,7 @@ class Player:
             # input a billentyukrol
             key = pygame.key.get_pressed()
             if key[pygame.K_SPACE] and self.jumped == False and self.in_air == False:
+                jump_fx.play()
                 self.vel_y = -15
                 self.jumped = True
             if not key[pygame.K_SPACE]:
@@ -205,7 +224,7 @@ class Player:
                 self.vel_y = 10
             dy += self.vel_y
 
-            #utkozes TO DO
+            #utkozes
             self.in_air = True
             for tile in world.tile_list:
                 # vizsszintes utkozes
@@ -225,10 +244,17 @@ class Player:
 
             # lavaval utkozes
             if pygame.sprite.spritecollide(self, lava_group, False):
+                death_fx.play()
                 game_over = -1
+
+            # csapdakkal utkozes
+            if pygame.sprite.spritecollide(self, trap_group, False):
+                game_over = -1
+                death_fx.play()
 
             #enemyvel utkozes
             if pygame.sprite.spritecollide(self, enemy_group, False):
+                death_fx.play()
                 game_over = -1
 
             # player poziziojanak frissittese
@@ -297,8 +323,11 @@ class World:
                     enemy = Enemy(col_count * tile_size, row_count * tile_size)
                     enemy_group.add(enemy)
                 if tile == 6:
-                    lava = Lava(col_count * tile_size, row_count * tile_size + (tile_size // 2))
+                    lava = Lava(col_count * tile_size, row_count * tile_size + tile_size // 2)
                     lava_group.add(lava)
+                if tile == 4:
+                    trap = Trap(col_count * tile_size, row_count * tile_size + tile_size // 2)
+                    trap_group.add(trap)
                 col_count += 1
             row_count += 1
 
@@ -328,11 +357,19 @@ class Lava(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('../animation/lava.png')
-        self.image = pygame.transform.scale(img, (tile_size, tile_size // 2))
+        self.image = pygame.transform.scale(img, (tile_size, tile_size*2 - 50))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
 
+class Trap(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        img = pygame.image.load('../animation/spikes.png')
+        self.image = pygame.transform.scale(img, (tile_size, tile_size*2 - 25))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
 #a map abrazolasa
 world_data = [
@@ -346,29 +383,32 @@ world_data = [
     [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 1],
     [1, 0, 2, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1],
+    [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 0, 2, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 2, 2, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 2, 2, 2, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
 ]
 
 #peldanyositas az osztalyokbol
 player = Player(100, screen_height)
 enemy_group = pygame.sprite.Group()
 lava_group = pygame.sprite.Group()
+trap_group = pygame.sprite.Group()
+
 world = World(world_data)
 
 #gombok létrehozása
 start_button = Button(screen_width // 2 - 300, screen_height // 2, start_img)
 exit_button = Button(screen_width // 2 + 100, screen_height // 2, exit_img)
 highscore_button = Button(screen_width // 2 - 100, screen_height // 2 + 150, highscore_img)
-restart_button = Button(screen_width // 2 - 50, screen_height // 2 +  100, restart_img)
+restart_button = Button(screen_width // 2 - 50, screen_height // 2 + 100, restart_img)
 
 
 run = True
@@ -390,6 +430,7 @@ while run:
             enemy_group.update()
 
         lava_group.draw(screen)
+        trap_group.draw(screen)
         enemy_group.draw(screen)
         game_over = player.update(game_over)
 
