@@ -123,7 +123,7 @@ fps = 60
 
 #screen merete
 screen_width = 1000
-screen_height = 1000
+screen_height = 800
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Platformer')
@@ -295,10 +295,16 @@ class Player:
 class World:
     def __init__(self, data):
         self.tile_list = []
+        self.gold_list = []
+        self.silver_list = []
+        self.bronze_list = []
 
         # blokk aniamciok
         dirt_img = pygame.image.load('../animation/dirt.png')
         grass_img = pygame.image.load('../animation/grass.png')
+        gold_img = pygame.image.load('../animation/coinGold.png')
+        silver_img = pygame.image.load('../animation/coinSilver.png')
+        bronze_img = pygame.image.load('../animation/coinBronze.png')
 
 #feldolgozza az arrayt ami a map infot tartalmazza
         row_count = 0
@@ -322,18 +328,47 @@ class World:
                 if tile == 3:
                     enemy = Enemy(col_count * tile_size, row_count * tile_size)
                     enemy_group.add(enemy)
-                if tile == 6:
-                    lava = Lava(col_count * tile_size, row_count * tile_size + tile_size // 2)
-                    lava_group.add(lava)
                 if tile == 4:
                     trap = Trap(col_count * tile_size, row_count * tile_size + tile_size // 2)
                     trap_group.add(trap)
+                if tile == 5:
+                    img = pygame.transform.scale(gold_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    gold = (img, img_rect)
+                    self.gold_list.append(gold)
+                if tile == 6:
+                    lava = Lava(col_count * tile_size, row_count * tile_size + tile_size // 2)
+                    lava_group.add(lava)
+                if tile == 7:
+                    img = pygame.transform.scale(silver_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    silver = (img, img_rect)
+                    self.silver_list.append(silver)
+                if tile == 8:
+                    img = pygame.transform.scale(bronze_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    bronze = (img, img_rect)
+                    self.bronze_list.append(bronze)
+
                 col_count += 1
             row_count += 1
 
     def draw(self):
         for tile in self.tile_list:
             screen.blit(tile[0], tile[1])
+        for gold in self.gold_list:
+            screen.blit(gold[0], gold[1])
+        for silver in self.silver_list:
+            screen.blit(silver[0], silver[1])
+        for bronze in self.bronze_list:
+            screen.blit(bronze[0], bronze[1])
+
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -362,6 +397,7 @@ class Lava(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+
 class Trap(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -371,7 +407,8 @@ class Trap(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-#a map abrazolasa
+
+# a map abrazolasa
 world_data = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -386,7 +423,7 @@ world_data = [
     [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 0, 0, 0, 2, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 8, 5, 0, 2, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 2, 2, 2, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1],
@@ -412,6 +449,9 @@ restart_button = Button(screen_width // 2 - 50, screen_height // 2 + 100, restar
 font = pygame.font.SysFont('Comic Sans MS', 30)
 
 start_time = 0
+gold_copy = world.gold_list.copy()
+silver_copy = world.silver_list.copy()
+bronze_copy = world.bronze_list.copy()
 
 run = True
 while run:
@@ -435,6 +475,16 @@ while run:
             seconds = (pygame.time.get_ticks() - start_time) // 1000 % 60
             timer = font.render(str(minutes) + ':' + str(seconds), False, (0, 0, 0))
 
+            for gold in world.gold_list:
+                if gold[1].colliderect(player):
+                    world.gold_list.remove(gold)
+            for silver in world.silver_list:
+                if silver[1].colliderect(player):
+                    world.silver_list.remove(silver)
+            for bronze in world.bronze_list:
+                if bronze[1].colliderect(player):
+                    world.bronze_list.remove(bronze)
+
         screen.blit(timer, (screen_width // 2 - 15, 45))
         lava_group.draw(screen)
         trap_group.draw(screen)
@@ -446,6 +496,9 @@ while run:
                 player.reset(100, screen_height)
                 game_over = 0
                 start_time = pygame.time.get_ticks()
+                world.gold_list = gold_copy.copy()
+                world.silver_list = silver_copy.copy()
+                world.bronze_list = bronze_copy.copy()
 
         #draw_grid()
 
