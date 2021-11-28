@@ -123,7 +123,7 @@ fps = 60
 
 #screen merete
 screen_width = 1000
-screen_height = 1000
+screen_height = 800
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Platformer')
@@ -409,7 +409,9 @@ start_button = Button(screen_width // 2 - 300, screen_height // 2, start_img)
 exit_button = Button(screen_width // 2 + 100, screen_height // 2, exit_img)
 highscore_button = Button(screen_width // 2 - 100, screen_height // 2 + 150, highscore_img)
 restart_button = Button(screen_width // 2 - 50, screen_height // 2 + 100, restart_img)
+font = pygame.font.SysFont('Comic Sans MS', 30)
 
+start_time = 0
 
 run = True
 while run:
@@ -419,6 +421,7 @@ while run:
 
     if main_manu == True:
         if start_button.draw() == True:
+            start_time = pygame.time.get_ticks()
             main_manu = False
         if exit_button.draw() == True:
             run = False
@@ -428,7 +431,11 @@ while run:
         world.draw()
         if game_over == 0:
             enemy_group.update()
+            minutes = (pygame.time.get_ticks() - start_time) // 60000
+            seconds = (pygame.time.get_ticks() - start_time) // 1000 % 60
+            timer = font.render(str(minutes) + ':' + str(seconds), False, (0, 0, 0))
 
+        screen.blit(timer, (screen_width // 2 - 15, 45))
         lava_group.draw(screen)
         trap_group.draw(screen)
         enemy_group.draw(screen)
@@ -438,6 +445,7 @@ while run:
             if restart_button.draw():
                 player.reset(100, screen_height)
                 game_over = 0
+                start_time = pygame.time.get_ticks()
 
         #draw_grid()
 
