@@ -298,6 +298,7 @@ class World:
         self.gold_list = []
         self.silver_list = []
         self.bronze_list = []
+        self.key_list = []
 
         # blokk aniamciok
         dirt_img = pygame.image.load('../animation/dirt.png')
@@ -305,6 +306,7 @@ class World:
         gold_img = pygame.image.load('../animation/coinGold.png')
         silver_img = pygame.image.load('../animation/coinSilver.png')
         bronze_img = pygame.image.load('../animation/coinBronze.png')
+        key_img = pygame.image.load('../animation/keyYellow.png')
 
 #feldolgozza az arrayt ami a map infot tartalmazza
         row_count = 0
@@ -355,6 +357,13 @@ class World:
                     img_rect.y = row_count * tile_size
                     bronze = (img, img_rect)
                     self.bronze_list.append(bronze)
+                if tile == 9:
+                    img = pygame.transform.scale(key_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    key = (img, img_rect)
+                    self.key_list.append(key)
 
                 col_count += 1
             row_count += 1
@@ -368,6 +377,8 @@ class World:
             screen.blit(silver[0], silver[1])
         for bronze in self.bronze_list:
             screen.blit(bronze[0], bronze[1])
+        for key in self.key_list:
+            screen.blit(key[0], key[1])
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -420,7 +431,7 @@ world_data = [
     [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 1],
     [1, 0, 2, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1],
+    [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 9, 3, 0, 0, 3, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 8, 5, 0, 2, 0, 1],
@@ -452,6 +463,7 @@ start_time = 0
 gold_copy = world.gold_list.copy()
 silver_copy = world.silver_list.copy()
 bronze_copy = world.bronze_list.copy()
+key_copy = world.key_list.copy()
 
 run = True
 while run:
@@ -484,6 +496,9 @@ while run:
             for bronze in world.bronze_list:
                 if bronze[1].colliderect(player):
                     world.bronze_list.remove(bronze)
+            for key in world.key_list:
+                if key[1].colliderect(player):
+                    world.key_list.remove(key)
 
         screen.blit(timer, (screen_width // 2 - 15, 45))
         lava_group.draw(screen)
@@ -499,6 +514,7 @@ while run:
                 world.gold_list = gold_copy.copy()
                 world.silver_list = silver_copy.copy()
                 world.bronze_list = bronze_copy.copy()
+                world.key_list = key_copy.copy()
 
         #draw_grid()
 
