@@ -490,12 +490,15 @@ while run:
             for gold in world.gold_list:
                 if gold[1].colliderect(player):
                     world.gold_list.remove(gold)
+                    coin_fx.play()
             for silver in world.silver_list:
                 if silver[1].colliderect(player):
                     world.silver_list.remove(silver)
+                    coin_fx.play()
             for bronze in world.bronze_list:
                 if bronze[1].colliderect(player):
                     world.bronze_list.remove(bronze)
+                    coin_fx.play()
             for key in world.key_list:
                 if key[1].colliderect(player):
                     world.key_list.remove(key)
