@@ -31,6 +31,12 @@ coin_img = pygame.image.load('../animation/coinGold.png')
 exit_img = pygame.image.load('../animation/exit_button.png')
 save_img = pygame.image.load('../animation/save_btn.png')
 load_img = pygame.image.load('../animation/load_btn.png')
+key_img = pygame.image.load('../animation/keyYellow.png')
+exit_img = pygame.image.load('../animation/exit.png')
+spikes_img = pygame.image.load('../animation/spikes.png')
+coinsilver_img = pygame.image.load('../animation/coinSilver.png')
+coinbronz_img = pygame.image.load('../animation/coinBronze.png')
+
 
 
 #define game variables
@@ -105,6 +111,26 @@ def draw_world():
 					#exit
 					img = pygame.transform.scale(exit_img, (tile_size, int(tile_size * 1.5)))
 					screen.blit(img, (col * tile_size, row * tile_size - (tile_size // 2)))
+				if world_data[row][col] == 9:
+					#exit
+					img = pygame.transform.scale(key_img, (tile_size, int(tile_size * 1.5)))
+					screen.blit(img, (col * tile_size, row * tile_size - (tile_size // 2)))
+				if world_data[row][col] == 10:
+					#exit
+					img = pygame.transform.scale(exit_img, (tile_size, int(tile_size * 1.5)))
+					screen.blit(img, (col * tile_size, row * tile_size - (tile_size // 2)))
+				if world_data[row][col] == 11:
+					#exit
+					img = pygame.transform.scale(spikes_img, (tile_size, int(tile_size * 1.5)))
+					screen.blit(img, (col * tile_size, row * tile_size - (tile_size // 2.5)))
+				if world_data[row][col] == 12:
+					#exit
+					img = pygame.transform.scale(coinsilver_img, (tile_size // 2, tile_size // 2))
+					screen.blit(img, (col * tile_size + (tile_size // 4), row * tile_size + (tile_size // 4)))
+				if world_data[row][col] == 13:
+					#exit
+					img = pygame.transform.scale(coinbronz_img,(tile_size // 2, tile_size // 2))
+					screen.blit(img, (col * tile_size + (tile_size // 4), row * tile_size + (tile_size // 4)))
 
 
 
@@ -187,12 +213,12 @@ while run:
 				#update tile value
 				if pygame.mouse.get_pressed()[0] == 1:
 					world_data[y][x] += 1
-					if world_data[y][x] > 8:
+					if world_data[y][x] > 13:
 						world_data[y][x] = 0
 				elif pygame.mouse.get_pressed()[2] == 1:
 					world_data[y][x] -= 1
 					if world_data[y][x] < 0:
-						world_data[y][x] = 8
+						world_data[y][x] = 13
 		if event.type == pygame.MOUSEBUTTONUP:
 			clicked = False
 		#up and down key presses to change level number

@@ -6,6 +6,8 @@ import tkinter as tk
 import mysql.connector
 import getpass
 import os
+import pickle
+from os import path
 
 current_player = "guest"
 
@@ -123,7 +125,7 @@ fps = 60
 
 #screen merete
 screen_width = 1000
-screen_height = 800
+screen_height = 1000
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Platformer')
@@ -132,6 +134,9 @@ pygame.display.set_caption('Platformer')
 tile_size = 50
 main_manu = True
 game_over = 0
+level = 1
+max_levels = 3
+key_up=False
 
 # blokkok aniamacioja
 bg_img = pygame.image.load('../animation/bg1.png')
@@ -141,6 +146,8 @@ start_img = pygame.image.load('../animation/start_button.png')
 exit_img = pygame.image.load('../animation/exit_button.png')
 highscore_img = pygame.image.load('../animation/highscore_button.png')
 restart_img = pygame.image.load('../animation/restart_btn.png')
+
+
 
 #jatek zene
 pygame.mixer.music.load('../sound/bgrm.wav')
@@ -213,10 +220,14 @@ class Player:
                 dx -= 5
                 self.flip = True
                 self.direction = -1
+                self.walking = True
             if key[pygame.K_RIGHT]:
                 dx += 5
                 self.flip = False
                 self.direction = 1
+                self.walking = True
+            if not key[pygame.K_RIGHT] and not key[pygame.K_LEFT]:
+                self.walking=False
 
             # gravitacio
             self.vel_y += 1
@@ -256,6 +267,8 @@ class Player:
             if pygame.sprite.spritecollide(self, enemy_group, False):
                 death_fx.play()
                 game_over = -1
+            if pygame.sprite.spritecollide(self, exit_group, False) and key_up:
+                game_over = 1
 
             # player poziziojanak frissittese
             self.rect.x += dx
@@ -273,22 +286,56 @@ class Player:
         screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
 
         return game_over
+    def update_animation(self):
+        ANIMATION_COOLDOWN=100
+        #update image depending on current frame
+        self.image = self.animation_list[self.action][self.frame_index]
+        #check if enough time has passed since the last update
+        if pygame.time.get_ticks() - self.update_time > ANIMATION_COOLDOWN:
+            self.update_time = pygame.time.get_ticks()
+            self.frame_index += 1
+        #if the animation has run out the reset back to the start
+        if self.frame_index >= len(self.animation_list[self.action]):
+            self.frame_index = 0
+
+    def update_action(self, new_action):
+        #check if the new action is different to the previous one
+        if new_action != self.action:
+            self.action = new_action
+            #update the animation settings
+            self.frame_index = 0
+            self.update_time = pygame.time.get_ticks()
 
     def reset(self, x , y):
         #player animacio, pozicio, mozgas
-        img = pygame.image.load('../animation/p1_stand.png')
-        self.dead_image = pygame.image.load('../animation/ghost.png')
-        self.image = pygame.transform.scale(img, (40, 80))
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.width = self.image.get_width()
-        self.height = self.image.get_height()
         self.vel_y = 0
         self.jumped = False
         self.in_air = True
         self.direction = 1
         self.flip = False
+        self.animation_list = []
+        self.frame_index = 0
+        self.action = 0
+        self.update_time = pygame.time.get_ticks()
+        self.walking = False
+        #load all images for the players
+        animation_types = ['Idle', 'Walk', 'Jump']
+        for animation in animation_types:
+            #reset temporary list of images
+            temp_list = []
+            #count number of files in the folder
+            num_of_frames = len(os.listdir(f'../animation/{animation}'))
+            for i in range(num_of_frames):
+                img = pygame.image.load(f'../animation/{animation}/{i}.png')
+                img = pygame.transform.scale(img, (40, 80))
+                temp_list.append(img)
+            self.animation_list.append(temp_list)
+        self.image = self.animation_list[self.action][self.frame_index]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+        self.dead_image = pygame.image.load('../animation/ghost.png')
 
 
 #palya osztalya
@@ -307,6 +354,7 @@ class World:
         silver_img = pygame.image.load('../animation/coinSilver.png')
         bronze_img = pygame.image.load('../animation/coinBronze.png')
         key_img = pygame.image.load('../animation/keyYellow.png')
+        exit_img = pygame.image.load('../animation/exit.png')
 
 #feldolgozza az arrayt ami a map infot tartalmazza
         row_count = 0
@@ -330,10 +378,10 @@ class World:
                 if tile == 3:
                     enemy = Enemy(col_count * tile_size, row_count * tile_size)
                     enemy_group.add(enemy)
-                if tile == 4:
-                    trap = Trap(col_count * tile_size, row_count * tile_size + tile_size // 2)
+                if tile == 11:
+                    trap = Trap(col_count * tile_size, row_count * tile_size - tile_size // 2)
                     trap_group.add(trap)
-                if tile == 5:
+                if tile == 7:
                     img = pygame.transform.scale(gold_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
                     img_rect.x = col_count * tile_size
@@ -343,14 +391,14 @@ class World:
                 if tile == 6:
                     lava = Lava(col_count * tile_size, row_count * tile_size + tile_size // 2)
                     lava_group.add(lava)
-                if tile == 7:
+                if tile == 12:
                     img = pygame.transform.scale(silver_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
                     img_rect.x = col_count * tile_size
                     img_rect.y = row_count * tile_size
                     silver = (img, img_rect)
                     self.silver_list.append(silver)
-                if tile == 8:
+                if tile == 13:
                     img = pygame.transform.scale(bronze_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
                     img_rect.x = col_count * tile_size
@@ -364,6 +412,9 @@ class World:
                     img_rect.y = row_count * tile_size
                     key = (img, img_rect)
                     self.key_list.append(key)
+                if tile == 10:
+                    exit = Exit(col_count * tile_size, row_count * tile_size - (tile_size // 2))
+                    exit_group.add(exit)
 
                 col_count += 1
             row_count += 1
@@ -379,6 +430,8 @@ class World:
             screen.blit(bronze[0], bronze[1])
         for key in self.key_list:
             screen.blit(key[0], key[1])
+
+
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -418,38 +471,46 @@ class Trap(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+class Exit(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        img = pygame.image.load('../animation/exit.png')
+        self.image = pygame.transform.scale(img, (tile_size, int(tile_size * 1.5)))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
-# a map abrazolasa
-world_data = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1],
-    [1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 2, 2, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 7, 0, 5, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1],
-    [1, 7, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 1],
-    [1, 0, 2, 0, 0, 7, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 9, 3, 0, 0, 3, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 8, 5, 0, 2, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 2, 2, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 2, 2, 2, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-]
+
+#level valtas
+def reset_level(level):
+    player.reset(100, screen_height - 130)
+    lava_group.empty()
+    exit_group.empty()
+    enemy_group.empty()
+    trap_group.empty()
+    key_up=False
+
+    #betolti a szintet, general
+    if path.exists(f'level{level}_data'):
+        pickle_in = open(f'level{level}_data', 'rb')
+        world_data = pickle.load(pickle_in)
+    world = World(world_data)
+
+    return world
 
 #peldanyositas az osztalyokbol
-player = Player(100, screen_height)
+player = Player(100, screen_height - 130)
 enemy_group = pygame.sprite.Group()
 lava_group = pygame.sprite.Group()
 trap_group = pygame.sprite.Group()
+exit_group = pygame.sprite.Group()
 
+
+#betolti a szintet, general
+if path.exists(f'level{level}_data'):
+    pickle_in = open(f'level{level}_data', 'rb')
+    world_data = pickle.load(pickle_in)
 world = World(world_data)
 
 #gombok létrehozása
@@ -486,40 +547,73 @@ while run:
             minutes = (pygame.time.get_ticks() - start_time) // 60000
             seconds = (pygame.time.get_ticks() - start_time) // 1000 % 60
             timer = font.render(str(minutes) + ':' + str(seconds), False, (0, 0, 0))
+            world_data = []
 
             for gold in world.gold_list:
                 if gold[1].colliderect(player):
                     world.gold_list.remove(gold)
-                    coin_fx.play()
             for silver in world.silver_list:
                 if silver[1].colliderect(player):
                     world.silver_list.remove(silver)
-                    coin_fx.play()
             for bronze in world.bronze_list:
                 if bronze[1].colliderect(player):
                     world.bronze_list.remove(bronze)
-                    coin_fx.play()
             for key in world.key_list:
                 if key[1].colliderect(player):
                     world.key_list.remove(key)
+                    key_up=True;
 
+
+            if player.in_air:
+                player.update_action(2)#2: jump
+            elif player.walking:
+                player.update_action(1)#2: jump
+            else:
+                player.update_action(0)#2: jump
+            
+            player.update_animation()
         screen.blit(timer, (screen_width // 2 - 15, 45))
         lava_group.draw(screen)
         trap_group.draw(screen)
         enemy_group.draw(screen)
+        exit_group.draw(screen)
         game_over = player.update(game_over)
+
 
         if game_over == -1:
             if restart_button.draw():
-                player.reset(100, screen_height)
+                world_data = []
+                player.reset(100, screen_height - 130)
                 game_over = 0
+                level=1
                 start_time = pygame.time.get_ticks()
                 world.gold_list = gold_copy.copy()
                 world.silver_list = silver_copy.copy()
                 world.bronze_list = bronze_copy.copy()
                 world.key_list = key_copy.copy()
+                world = reset_level(level)
 
         #draw_grid()
+
+        #ha a jatekos teljesit egy szintet
+        if game_over == 1:
+            #uj szintre megy, torli a palya adatokat
+            level += 1
+            if level <= max_levels:
+                #reset level
+                world_data = []
+                world = reset_level(level)
+                game_over = 0
+            else:
+                if restart_button.draw():
+                    level = 1
+                    #reset level
+                    world_data = []
+                    world = reset_level(level)
+                    game_over = 0
+
+
+            
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
