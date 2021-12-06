@@ -526,6 +526,8 @@ silver_copy = world.silver_list.copy()
 bronze_copy = world.bronze_list.copy()
 key_copy = world.key_list.copy()
 
+point_counter = 0
+
 run = True
 while run:
 
@@ -547,17 +549,22 @@ while run:
             minutes = (pygame.time.get_ticks() - start_time) // 60000
             seconds = (pygame.time.get_ticks() - start_time) // 1000 % 60
             timer = font.render(str(minutes) + ':' + str(seconds), False, (0, 0, 0))
+
+            points = font.render("Points: " + str(point_counter), False, (255, 255, 255))
             world_data = []
 
             for gold in world.gold_list:
                 if gold[1].colliderect(player):
                     world.gold_list.remove(gold)
+                    point_counter += 1000
             for silver in world.silver_list:
                 if silver[1].colliderect(player):
                     world.silver_list.remove(silver)
+                    point_counter += 500
             for bronze in world.bronze_list:
                 if bronze[1].colliderect(player):
                     world.bronze_list.remove(bronze)
+                    point_counter += 100
             for key in world.key_list:
                 if key[1].colliderect(player):
                     world.key_list.remove(key)
@@ -573,6 +580,7 @@ while run:
             
             player.update_animation()
         screen.blit(timer, (screen_width // 2 - 15, 45))
+        screen.blit(points, (0, 0))
         lava_group.draw(screen)
         trap_group.draw(screen)
         enemy_group.draw(screen)
