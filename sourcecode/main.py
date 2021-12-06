@@ -58,7 +58,7 @@ except mysql.connector.errors.ProgrammingError:
     exit()
 
 window = tk.Tk()
-window.title('Hello Python')
+window.title('Login screen')
 window.geometry("600x600")
 
 tk.Label(window, text="Username").pack()
@@ -75,6 +75,7 @@ def login():
         print("This username does not exist.")
     else:
         if result[0][0] == e2.get():
+            global current_player
             current_player = e1.get()
             print("Login successful")
         else:
@@ -540,8 +541,18 @@ while run:
             main_manu = False
         if exit_button.draw() == True:
             run = False
-        if highscore_button.draw() == True:
-            pass
+        if highscore_button.draw() == True:            
+            window = tk.Tk()
+            window.title('Highscores')
+            window.geometry("300x300")
+            tk.Label(window, text="Name   Points   Time").pack()
+            tk.Label(window, text="").pack()
+            with open('points.txt', 'r') as file:
+                data = file.readlines()
+            for i in range(min(3, len(data))):
+                tk.Label(window, text=f"{data[i]}".replace(',', '   ')).pack()
+            window.mainloop()
+            
     else:
         world.draw()
         if game_over == 0:
@@ -613,15 +624,33 @@ while run:
                 world = reset_level(level)
                 game_over = 0
             else:
-                if restart_button.draw():
-                    level = 1
-                    #reset level
-                    world_data = []
-                    world = reset_level(level)
-                    game_over = 0
-
-
-            
+                main_manu = True
+                with open('points.txt', 'r') as file:
+                    data = file.readlines()
+                if len(data) == 3:
+                    min_line = -1
+                    min_score = min(int(data[0].split(',')[1]), int(data[1].split(',')[1]), int(data[2].split(',')[1]))
+                    for i in range(3):
+                        if int(data[i].split(',')[1]) == min_score:
+                            min_line = i
+                            break
+                    if min_line != -1:
+                        data[min_line] = f"{current_player},{str(point_counter)},{str(minutes)}:{str(seconds)}\n"
+                        with open('points.txt', 'w') as file:
+                            file.writelines( data )
+                else:
+                    with open('points.txt', 'r') as file:
+                        data = file.readlines()
+                    f = open("points.txt", "w")
+                    data.append(f"{current_player},{str(point_counter)},{str(minutes)}:{str(seconds)}\n")
+                    f.writelines(data)
+                    f.close()
+                level = 1
+                #reset level
+                world_data = []
+                world = reset_level(level)
+                game_over = 0
+                point_counter = 0
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
